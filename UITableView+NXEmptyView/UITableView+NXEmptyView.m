@@ -48,7 +48,7 @@ void nxEV_swizzle(Class c, SEL orig, SEL new)
 
 - (BOOL)nxEV_hasSectionsToDisplay;
 {
-    return self.numberOfSections > 0;
+    return self.numberOfSections > 1;
 }
 
 - (BOOL)nxEV_hasRowsToDisplay;
@@ -110,7 +110,7 @@ void nxEV_swizzle(Class c, SEL orig, SEL new)
     emptyView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
     
     // check available data
-    BOOL emptyViewShouldBeShown = (self.nxEV_hasSectionsToDisplay == NO);
+    BOOL emptyViewShouldBeShown = !(self.nxEV_hasSectionsToDisplay || self.nxEV_hasRowsToDisplay);
     
     // check bypassing
     if (emptyViewShouldBeShown && [self.dataSource respondsToSelector:@selector(tableViewShouldBypassNXEmptyView:)]) {
